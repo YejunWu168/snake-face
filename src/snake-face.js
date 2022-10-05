@@ -3,9 +3,22 @@ let video;
 let predictions = [];
 let ready = false;
 
+const width =
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
+const height =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
+
+const canvasWidth = width / 2;
+const canvasHeight = canvasWidth * 0.75;
+
 const s1 = function (sketch) {
   sketch.setup = function () {
-    sketch.createCanvas(640, 480);
+    const videoCanvas = sketch.createCanvas(canvasWidth, canvasHeight);
+    videoCanvas.parent('#container');
     video = sketch.createCapture(sketch.VIDEO);
     video.size(sketch.width, sketch.height);
 
@@ -22,8 +35,6 @@ const s1 = function (sketch) {
   };
 
   sketch.modelReady = function () {
-    document.querySelector('h1').innerText = 'Move yo face!';
-
     new p5(s2);
   };
 
@@ -57,9 +68,9 @@ const s2 = function (sketch) {
   let numSegments = 10;
   let direction = 'right';
 
-  const xStart = 0; //starting x coordinate for snake
-  const yStart = 250; //starting y coordinate for snake
-  const diff = 10;
+  let xStart = 0; //starting x coordinate for snake
+  let yStart = 250; //starting y coordinate for snake
+  let diff = 10;
 
   let xCor = [];
   let yCor = [];
@@ -68,12 +79,36 @@ const s2 = function (sketch) {
   let yFruit = 0;
   let scoreElem;
 
+  let button;
+
   sketch.setup = function () {
     scoreElem = sketch.createDiv('Score = 0');
-    scoreElem.position(10, 60);
+    scoreElem.parent('#score-container');
+    // scoreElem.position(10, 60);
     scoreElem.id = 'score';
 
-    sketch.createCanvas(500, 500);
+    button = sketch.createButton('reset');
+    button.parent('#btn-container');
+    button.mousePressed(sketch.reset);
+
+    const snakeCanvas = sketch.createCanvas(canvasWidth, canvasHeight);
+    snakeCanvas.parent('#container');
+    sketch.reset();
+  };
+
+  sketch.reset = function () {
+    scoreElem.html('Score = 0');
+
+    numSegments = 10;
+    direction = 'right';
+    xStart = 0; //starting x coordinate for snake
+    yStart = 250; //starting y coordinate for snake
+    diff = 10;
+    xCor = [];
+    yCor = [];
+    xFruit = 0;
+    yFruit = 0;
+
     sketch.frameRate(15);
     sketch.stroke(255);
     sketch.strokeWeight(10);
@@ -83,6 +118,7 @@ const s2 = function (sketch) {
       xCor.push(xStart + i * diff);
       yCor.push(yStart);
     }
+    sketch.loop();
   };
 
   sketch.draw = function () {
@@ -199,21 +235,17 @@ const s2 = function (sketch) {
     const facialPoint = predictions?.[0]?.annotations?.noseTip?.[0];
 
     if (facialPoint?.[0] < 300) {
-      console.log('right');
       direction = 'right';
     }
 
     if (facialPoint?.[0] > 400) {
-      console.log('right');
       direction = 'left';
     }
 
     if (facialPoint?.[1] < 230) {
-      console.log('up');
       direction = 'up';
     }
     if (facialPoint?.[1] > 320) {
-      console.log('down');
       direction = 'down';
     }
   };

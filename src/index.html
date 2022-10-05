@@ -4,6 +4,8 @@
     <title>SnakeFace</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+
     <script
       src="https://unpkg.com/ml5@latest/dist/ml5.min.js"
       type="text/javascript"
@@ -13,7 +15,14 @@
   </head>
 
   <body>
-    <h1 style="margin-bottom: 20px">Snake Face</h1>
+    <header>
+      <h1>SnakeFace</h1>
+      <section class="score">
+        <div id="score-container"></div>
+        <div id="btn-container"></div>
+      </section>
+    </header>
+    <div id="container"></div>
   </body>
 
   <script src="./snake-face.js"></script>

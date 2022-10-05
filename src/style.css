@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+}
+
+#container {
+  display: flex;
+}
+header {
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+#score-container {
+  font-size: 24px;
+  min-width: 350px;
+}
+
+button {
+  padding: 15px;
+  font-weight: 700;
+  font-size: 2rem;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.5s ease;
+  max-width: 120px;
+
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background-color: #f6e58d;
+  color: #000;
+  transition: all 0.5s ease 0s;
+  box-shadow: 0 10px #f9ca24;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+}
