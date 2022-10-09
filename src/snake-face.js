@@ -3,26 +3,16 @@ let video;
 let predictions = [];
 let ready = false;
 
-const width =
-  window.innerWidth ||
-  document.documentElement.clientWidth ||
-  document.body.clientWidth;
-const height =
-  window.innerHeight ||
-  document.documentElement.clientHeight ||
-  document.body.clientHeight;
-
-const canvasWidth = width / 2;
-const canvasHeight = canvasWidth * 0.75;
-
 const s1 = function (sketch) {
   sketch.setup = function () {
-    const videoCanvas = sketch.createCanvas(canvasWidth, canvasHeight);
+    const videoCanvas = sketch.createCanvas(640, 480);
     videoCanvas.parent('#container');
     video = sketch.createCapture(sketch.VIDEO);
     video.size(sketch.width, sketch.height);
 
-    facemesh = ml5.facemesh(video, sketch.modelReady);
+    facemesh = ml5.facemesh(video, sketch.modelReady, {
+      flipHorizontal: true,
+    });
 
     // This sets up an event that fills the global variable "predictions"
     // with an array every time new predictions are made
@@ -91,7 +81,7 @@ const s2 = function (sketch) {
     button.parent('#btn-container');
     button.mousePressed(sketch.reset);
 
-    const snakeCanvas = sketch.createCanvas(canvasWidth, canvasHeight);
+    const snakeCanvas = sketch.createCanvas(640, 480);
     snakeCanvas.parent('#container');
     sketch.reset();
   };

@@ -1,17 +1,38 @@
+@font-face {
+  font-family: 'bouncy';
+  src: url('./assets/bounch-thin.woff2') format('woff2');
+}
+
 body {
   margin: 0;
+  font-family: 'bouncy';
+  -webkit-text-stroke: 2px black;
+  color: #ffde00;
+  background-image: url('./assets/blue-bg.gif');
+  background-position-y: bottom;
+  background-size: cover;
 }
 
 #container {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 header {
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 48px;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
 #score-container {
-  font-size: 24px;
+  font-size: 48px;
   min-width: 350px;
 }
 
@@ -32,9 +53,4 @@ button {
   color: #000;
   transition: all 0.5s ease 0s;
   box-shadow: 0 10px #f9ca24;
-}
-
-.score {
-  display: flex;
-  align-items: center;
 }
