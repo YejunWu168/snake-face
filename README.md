@@ -11,7 +11,6 @@ This demo makes use of P5.js and ML5.js which go hand in hand and makes building
 ### Where can I view more?
 
 - Demo: [snakeface.davebitter.com](http://snakeface.davebitter.com/)
-- Google Day code: [github.com/YejunWu168/snake-face](http://github.com/YejunWu168/snake-face)
 
 ## Installation
 
